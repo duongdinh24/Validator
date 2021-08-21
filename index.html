@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+     <div class="main">
+
+        <!-- Form 1: sign up -->
+        <form action="" method="POST" class="form" id="form-1">
+             <h3 class="heading">Thành viên đăng ký</h3>
+             <p class="desc">Cùng nhau học lập trình miễn phí tại F8 💗</p>
+
+             <div class="spacer"></div>
+
+             <div class="form-group">
+                 <label for="fullname" class="form-label">Tên đầy đủ</label>
+                 <input type="text" id="fullname" name="fullname" placeholder="VD: Dương Định" class="form-control">
+                <span class="form-message"></span>
+             </div>
+
+             <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" placeholder="VD: email@domain.com" class="form-control">
+               <span class="form-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" class="form-control">
+               <span class="form-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" class="form-control">
+               <span class="form-message"></span>
+            </div>
+
+            <!-- Nếu thẻ nhậplà checkbox or radio thì cho trùng name trong1 nhóm và phải có thẻ value,
+               Nếu là select thì bỏ value thẻ đầu tiên -->
+
+            <!-- <div class="form-group">
+                <label for="gener" class="form-label">Nhập lại mật khẩu</label>
+                <div>
+                  <input type="radio" id="gener" name="gener" value="male" class="form-control"> Nam
+                </div>
+                <div>
+                    <input type="radio" id="gener" name="gener"  value="female" class="form-control"> Nữ
+                </div>
+                <div>
+                    <input type="radio" id="gener" name="gener"  value="other" class="form-control"> Nam
+                </div>
+               <span class="form-message"></span>
+            </div> -->
+
+            <!-- <div class="form-group">
+                <label for="provice" class="form-label">Tỉnh/TP</label>
+                <select id="province" name="province"class="form-control">
+                    <option value="">--Chọn Tỉnh/TP</option>
+                    <option value="hni">Hà Nội</option>
+                    <option value="hpg">Hải Phòng</option>
+                </select>
+               <span class="form-message"></span>
+            </div> -->
+
+            <button class="form-submit">Đăng ký</button>
+        </form>
+
+        <!-- Form 2: Login -->
+        <form action="" method="POST" class="form" id="form-2">
+            <h3 class="heading">Đăng nhập</h3>
+            <p class="desc">Cùng nhau học lập trình miễn phí tại F8 💗</p>
+    
+            <div class="spacer"></div>
+    
+            <div class="form-group">
+               <label for="email" class="form-label">Email</label>
+               <input type="email" id="email" name="email" placeholder="VD: email@domain.com" class="form-control">
+              <span class="form-message"></span>
+           </div>
+    
+           <div class="form-group">
+               <label for="password" class="form-label">Mật khẩu</label>
+               <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" class="form-control">
+              <span class="form-message"></span>
+           </div>
+    
+           <button class="form-submit">Đăng nhập</button>
+        </form>
+    </div>
+
+
+    <script src="./validator.js"></script>
+    <script>
+        Validator({
+            form: '#form-1',
+            formGroupSelector: '.form-group',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#fullname'),
+                Validator.isEmail('#email'),
+                Validator.minLength('#password', 6),
+                Validator.isRequired('#password_confirmation'),
+                Validator.isConfirmed('#password_confirmation', function() {
+                    return document.querySelector('#form-1 #password').value;
+                }, 'Mật khẩu nhập lại không chính xác'),
+
+            ],
+            onSubmit: function(data) {
+                console.log(data);
+            }
+        });
+
+        Validator({
+            form: '#form-2',
+            formGroupSelector: '.form-group',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isEmail('#email'),
+                Validator.minLength('#password', 6),
+
+            ],
+            onSubmit: function(data) {
+                console.log(data);
+            }
+        });
+    </script>
+</body>
+</html>
